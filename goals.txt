@@ -1,0 +1,7 @@
+Plot data in 3d
+group data by clustering - (ignoring depth?)
+	don't mess with lat-long, but fit time to parameters
+plot data over map?
+create vectors from clusters
+	plot vectors over clusters?
+	
