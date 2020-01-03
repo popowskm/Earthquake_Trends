@@ -11,7 +11,6 @@ clustering = DBSCAN(eps=0.3, min_samples=5, metric='euclidean').fit(newdata)
 core_samples_mask = np.zeros_like(clustering.labels_, dtype=bool)
 core_samples_mask[clustering.core_sample_indices_]= True
 labels = clustering.labels_
-#print(clustering.labels_)
 
 n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
 n_noise_ = list(labels).count(-1)

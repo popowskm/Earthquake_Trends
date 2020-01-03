@@ -12,10 +12,9 @@ quake_data = []
 for row in quake_strings:
     if row[0][0].isdigit():
         date = d.strptime(row[3].rstrip(), '%Y-%m-%d %H:%M:%S').timestamp()
-        lat = float(row[4])
-        log = float(row[5])
-        depth = float(row[2])
-        quake_data.append([date, lat, log, depth])
+        x = float(row[4])
+        y = float(row[5])
+        quake_data.append([date, x, y])
 
-np.savetxt('data/earthquake_formatted_data_utm.txt', quake_data, fmt="%.7f", header="time lat long depth")
-np.savetxt('data/earthquake_formatted_data_partial_utm.txt', quake_data[-1000:], fmt="%.7f", header="time lat long depth")
+np.savetxt('data/earthquake_formatted_data_utm.txt', quake_data, fmt="%.7f", header="time x y")
+np.savetxt('data/earthquake_formatted_data_partial_utm.txt', quake_data[-1000:], fmt="%.7f", header="time x y")
