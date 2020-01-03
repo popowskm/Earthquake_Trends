@@ -17,5 +17,5 @@ for row in quake_strings:
         depth = float(row[2])
         quake_data.append([date, lat, log, depth])
 
-np.savetxt('earthquake_formatted_data.txt', quake_data, fmt="%.7f", header="time lat long")
-np.savetxt('earthquake_formatted_data_partial.txt', quake_data[-1000:], fmt="%.7f", header="time lat long")
+np.savetxt('earthquake_formatted_data.txt', quake_data, fmt="%.7f", header="time lat long depth")
+np.savetxt('earthquake_formatted_data_partial.txt', quake_data[-1000:], fmt="%.7f", header="time lat long depth")
