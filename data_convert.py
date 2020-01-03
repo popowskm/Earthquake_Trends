@@ -1,6 +1,4 @@
 import numpy as np
-#import sklearn
-#from sklearn.cluster import DBSCAN
 from datetime import datetime as d
 
 quake_strings = []
@@ -20,3 +18,4 @@ for row in quake_strings:
         quake_data.append([date, lat, log, depth])
 
 np.savetxt('earthquake_formatted_data.txt', quake_data, fmt="%.7f", header="time lat long")
+np.savetxt('earthquake_formatted_data_partial.txt', quake_data[-1000:], fmt="%.7f", header="time lat long")
