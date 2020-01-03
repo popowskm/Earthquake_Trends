@@ -4,8 +4,8 @@ from sklearn.cluster import DBSCAN
 from sklearn.preprocessing import StandardScaler
 from sklearn import metrics
 
-filename = 'earthquake_formatted_data_partial.txt'
-data = np.loadtxt(filename,skiprows=1)
+filename = 'earthquake_formatted_data_partial_utm.txt'
+data = np.loadtxt('data/' + filename,skiprows=1)
 newdata = StandardScaler().fit_transform(data)
 clustering = DBSCAN(eps=0.3, min_samples=5, metric='euclidean').fit(newdata)
 core_samples_mask = np.zeros_like(clustering.labels_, dtype=bool)
