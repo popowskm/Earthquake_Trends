@@ -1,4 +1,3 @@
-print(__doc__)
 import numpy as np
 from sklearn.cluster import DBSCAN
 from sklearn.preprocessing import StandardScaler
@@ -6,6 +5,7 @@ from sklearn import metrics
 
 # Modifiable constants
 filename = 'earthquake_formatted_data_partial_utm.txt' # Data source file located in data folder
+outfile = 'earthquake_output_data.txt' # Output file name
 dist = 10000 # Tolerance in ~distance of points during clustering
 samps = 5 # Number of samples required to constitute a cluster
 
@@ -45,3 +45,5 @@ for k, col in zip(unique_labels, colors):
     xy = data[class_member_mask & ~core_samples_mask]
     ax.scatter(xy[:, 1], xy[:,2], xy[:,0], marker='o', s=6, c=color, edgecolor='k')
 plt.show()
+output = [(np.append(data[k], labels[k])) for k,m in enumerate(labels)]
+np.savetxt("output/"+outfile, output, fmt="%.7f", header="time x y cluster_labels")
