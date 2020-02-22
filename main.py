@@ -10,7 +10,8 @@ dist = 20000  # Tolerance in ~radius of points during clustering
 samps = 10  # Minimum number of samples required to constitute a cluster
 scale_time = 4  # "4" equates 1 week (604k seconds) ~= 160km for clustering purposes
 
-data = np.loadtxt('data/' + filename,skiprows=1)
+data_raw = np.loadtxt('data/' + filename,skiprows=1)
+data = data_raw
 data[:,0] = data[:,0]/scale_time  # Transform seconds to be in line with distance scale of x and y
 
 clustering = DBSCAN(eps=dist, min_samples=samps, metric='euclidean').fit(data)
@@ -21,7 +22,7 @@ core_samples_mask[clustering.core_sample_indices_]= True
 
 # Get stats about clustering data
 labels = clustering.labels_
-output = [(np.append(data[k], labels[k])) for k, m in enumerate(labels)]
+output = [(np.append(data_raw[k], labels[k])) for k, m in enumerate(labels)]
 np.savetxt("output/" + outfile, output, fmt="%.7f", header="time x y cluster_labels")
 
 n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
