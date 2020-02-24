@@ -25,11 +25,12 @@ data_raw = np.loadtxt('data/' + filename,skiprows=1)
 data = np.copy(data_raw)
 labels = []
 core_samples_mask_master = []
+label_headers = ''
 for dist in range(dist_min, dist_max, dist_step):
     for samps in range(samps_min, samps_max, samps_step):
         for scale_time in range(scale_time_min, scale_time_max, scale_time_step):
+            label_headers += ('D:' + str(dist) + 'S:' + str(samps) + 'T:' + str(scale_time) + ' ')
             data[:,0] = data_raw[:,0]/scale_time  # Transform seconds to be in line with distance scale of x and y
-
             clustering = DBSCAN(eps=dist, min_samples=samps, metric='euclidean').fit(data)
 
             # Mask out all but core sample data 
@@ -42,7 +43,8 @@ for dist in range(dist_min, dist_max, dist_step):
             labels.append(clustering.labels_)
 
 output = [(np.append(data_raw[k], [row[k] for row in labels])) for k, m in enumerate(data_raw)]
-np.savetxt("output/" + outfile, output, fmt="%.7f", header="time x y cluster_labels")
+output_header = "time x y " + label_headers
+np.savetxt("output/" + outfile, output, fmt="%.7f", header=output_header)
 # Currently uses inital conditions
 if display:
     n_clusters_ = len(set(labels[0])) - (1 if -1 in labels[0] else 0)
