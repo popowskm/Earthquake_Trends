@@ -11,7 +11,7 @@ samps = 10  # Minimum number of samples required to constitute a cluster
 scale_time = 4  # "4" equates 1 week (604k seconds) ~= 160km for clustering purposes
 
 data_raw = np.loadtxt('data/' + filename,skiprows=1)
-data = data_raw
+data = np.copy(data_raw)
 data[:,0] = data[:,0]/scale_time  # Transform seconds to be in line with distance scale of x and y
 
 clustering = DBSCAN(eps=dist, min_samples=samps, metric='euclidean').fit(data)
